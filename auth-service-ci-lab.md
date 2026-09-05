@@ -103,7 +103,7 @@ Each student forks all four repos (`zen-infra`, `zen-gitops`, `zen-pharma-backen
 (`var.github_org` = their GitHub username). **No instructor action is required per
 student** — this is the main advantage over the lab1 shared-cluster model.
 
-Instructor's one-time job: make sure `DPP-2026/zen-infra`, `zen-gitops`,
+Instructor's one-time job: make sure `kometaj/zen-infra`, `zen-gitops`,
 `zen-pharma-backend`, and `zen-pharma-frontend` are visible/forkable (public, or students
 added as collaborators), and that Actions are allowed to run on forks at the org level
 (**Organization Settings → Actions → General → Fork pull request workflows**, if the
@@ -122,7 +122,7 @@ automates:
    ```bash
    aws iam update-assume-role-policy \
      --role-name pharma-dev-github-actions-role \
-     --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Federated":"arn:aws:iam::<ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"},"Action":"sts:AssumeRoleWithWebIdentity","Condition":{"StringEquals":{"token.actions.githubusercontent.com:aud":"sts.amazonaws.com"},"StringLike":{"token.actions.githubusercontent.com:sub":["repo:DPP-2026/zen-pharma-backend:ref:refs/heads/develop","repo:DPP-2026/zen-pharma-backend:ref:refs/heads/main","repo:<STUDENT-USERNAME>/zen-pharma-backend:*"]}}}]}'
+     --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Federated":"arn:aws:iam::<ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"},"Action":"sts:AssumeRoleWithWebIdentity","Condition":{"StringEquals":{"token.actions.githubusercontent.com:aud":"sts.amazonaws.com"},"StringLike":{"token.actions.githubusercontent.com:sub":["repo:kometaj/zen-pharma-backend:ref:refs/heads/develop","repo:kometaj/zen-pharma-backend:ref:refs/heads/main","repo:<STUDENT-USERNAME>/zen-pharma-backend:*"]}}}]}'
    ```
    Remember: `update-assume-role-policy` **replaces** the whole `sub` list — always include
    every previous student's entry when adding a new one.
@@ -155,7 +155,7 @@ kubectl get nodes   # should list cluster nodes
 
 ### Step 1.1 — Fork zen-pharma-backend
 
-1. Go to `https://github.com/DPP-2026/zen-pharma-backend` → **Fork** → **Create fork**
+1. Go to `https://github.com/kometaj/zen-pharma-backend` → **Fork** → **Create fork**
 2. Clone it:
 
 ```bash
@@ -183,7 +183,7 @@ run.
 
 ### Step 1.2 — Fork zen-gitops (if you haven't already)
 
-1. Go to `https://github.com/DPP-2026/zen-gitops` → **Fork** → **Create fork**
+1. Go to `https://github.com/kometaj/zen-gitops` → **Fork** → **Create fork**
 2. Clone it in a separate directory and follow `zen-gitops/README.md` → **"After
    Forking — Required Personalisation"** to replace the instructor's AWS account ID and RDS
    instance ID with your own throughout `envs/`. Do this before continuing — otherwise
